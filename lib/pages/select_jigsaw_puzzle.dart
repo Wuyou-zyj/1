@@ -34,7 +34,7 @@ class _SelectJigsawPuzzleState extends State<SelectJigsawPuzzle> {
       margin: const EdgeInsets.all(15),
       decoration:  const BoxDecoration(color: Colors.grey),
       child: Row(
-
+mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Container(
               alignment: Alignment.center,
