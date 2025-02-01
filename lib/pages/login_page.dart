@@ -1,5 +1,5 @@
 import 'package:culture_popularization_app/dio/user_dio.dart';
-import 'package:culture_popularization_app/user/user_inf.dart';
+import 'package:culture_popularization_app/models/user_inf.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import '../route/routes.dart';

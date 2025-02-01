@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-import '../user/user_inf.dart';
+import '../models/user_inf.dart';
 class UserDio{
   static const String url = '';
   static final Dio _dio = Dio(

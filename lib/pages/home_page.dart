@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../route/routes.dart';
-import '../user/user_inf.dart';
+import '../models/user_inf.dart';
 import '../dio/user_dio.dart';
 import 'package:dio/dio.dart';
 

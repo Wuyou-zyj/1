@@ -1,3 +1,5 @@
+import 'package:culture_popularization_app/widgets/puzzle_grid.dart';
+import 'package:culture_popularization_app/widgets/puzzle_row.dart';
 import 'package:flutter/material.dart';
 
 import '../route/routes.dart';
@@ -20,7 +22,7 @@ class _JigsawPuzzleState extends State<JigsawPuzzle> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Column(
+          child: ListView(
         children: [
           Row(children: [
             GestureDetector(onTap: (){
@@ -73,37 +75,12 @@ class _JigsawPuzzleState extends State<JigsawPuzzle> {
           SizedBox(
             height: 50,
           ),
-          Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: GridView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 120,
-                  mainAxisSpacing: 1,
-                  crossAxisSpacing: 1),
-              itemBuilder: (context, index) {
-                return const Text("拼图");
-              },
-              itemCount: 16,
-            ),
-          ),
+          //原来的代码存在界面尺寸改变导致行数或列数改变
+          PuzzleGrid(),
           SizedBox(
             height: 20,
           ),
-          Container(margin: EdgeInsets.only(left: 20,right: 20),
-            padding: EdgeInsets.all(20),
-            decoration: BoxDecoration(color: Colors.grey),
-            child: Row(
-              children: [
-                Container(padding: EdgeInsets.all(20),child: Text("未拼图")),
-                Container(padding: EdgeInsets.all(20),child: Text("未拼图")),
-                Container(padding: EdgeInsets.all(20),child: Text("未拼图")),
-                Container(padding: EdgeInsets.all(20),child: Text("未拼图"))
-              ],
-            ),
-          )
+          PuzzleRow()
         ],
       )),
     );
