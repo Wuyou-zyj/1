@@ -1,7 +1,9 @@
+import 'package:culture_popularization_app/dio/dio_instance.dart';
 import 'package:culture_popularization_app/route/routes.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  DioInstance.instance().initDio(baseUrl: "http://47.96.150.75:8080/");
   runApp(const MyApp());
 }
 

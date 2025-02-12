@@ -40,6 +40,7 @@ class Routes {
         return pageRoute(const SelectJigsawPuzzle());
       case RoutePath.login:
         return pageRoute(const Login());
+
     }
     return pageRoute(const Scaffold(body: Center(child: Text("路由不存在"))));
   }
@@ -63,6 +64,10 @@ class RoutePath {
 
   ///选择拼图页面
   static const String selectJigsawPuzzle = "/select_jigsaw_puzzle";
+
+  ///拼图页面
+  static const String jigsawPuzzle = "/jigsaw_puzzle";
+
 
   ///登录页面
   static const String login = "/login";

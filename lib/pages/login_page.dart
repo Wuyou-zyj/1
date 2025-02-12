@@ -1,8 +1,11 @@
+
 import 'package:culture_popularization_app/dio/user_dio.dart';
 import 'package:culture_popularization_app/models/user_inf.dart';
+import 'package:culture_popularization_app/pages/jigsaw_puzzle.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import '../route/routes.dart';
+
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -17,7 +20,7 @@ class _LoginState extends State<Login> {
   String _errorMessage = '';
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
   }
 
@@ -31,7 +34,6 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       backgroundColor: Colors.white,
       body: SafeArea(
         child: LayoutBuilder(
@@ -41,7 +43,6 @@ class _LoginState extends State<Login> {
               child: Column(
                 children: [
                   SizedBox(height: constraints.maxHeight * 0.1),
-                  
                   SizedBox(height: constraints.maxHeight * 0.1),
                   Text(
                     "欢迎",
@@ -71,7 +72,7 @@ class _LoginState extends State<Login> {
                           ),
                           keyboardType: TextInputType.number,
                           onSaved: (phone) {
-                            // Save 
+                            // Save
                           },
                         ),
                         Padding(
@@ -92,59 +93,62 @@ class _LoginState extends State<Login> {
                               ),
                             ),
                             onSaved: (passaword) {
-                              // Save 
+                              // Save
                             },
                           ),
                         ),
-                        _errorMessage.isEmpty? SizedBox(
-                          height: constraints.maxHeight * 0.03,
-                        ):SizedBox(
-                          height: constraints.maxHeight * 0.03,
-                          child: Text(
-                            _errorMessage,
-                            style: const TextStyle(
-                              
-                              color: Colors.redAccent
-                            ),
-                          ),
-                        ),
+                        _errorMessage.isEmpty
+                            ? SizedBox(
+                                height: constraints.maxHeight * 0.03,
+                              )
+                            : SizedBox(
+                                height: constraints.maxHeight * 0.03,
+                                child: Text(
+                                  _errorMessage,
+                                  style:
+                                      const TextStyle(color: Colors.redAccent),
+                                ),
+                              ),
                         ElevatedButton(
-                          onPressed: () async{
+                          onPressed: () async {
                             String id = _usernameController.text;
                             String pwrd = _passwordController.text;
-                            if(id.isEmpty||pwrd.isEmpty){
+                            if (id.isEmpty || pwrd.isEmpty) {
                               setState(() {
-                              _errorMessage = "请输入学号和密码";
-                            });
-                            return;
-                  
+                                _errorMessage = "请输入学号和密码";
+                              });
+                              return;
                             }
                             setState(() {
                               _errorMessage = "请稍后... ";
                             });
-                            try{
+                            try {
                               Response res = await UserDio.signin(id, pwrd);
-                              if(res.statusCode==200){
-                                if(res.data['code']==200){
-                                  User.setInf(
-                                    id,
-                                    res.data['data']['user']['uid'],
-                                    pwrd,
-                                    res.data['data']['token']
-                                  );
-                                  Routes.pushForNamed(context, RoutePath.selectJigsawPuzzle);
-                                }else{
+
+                              if (res.statusCode == 200) {
+
+                                if (res.data['code'] == 200) {
+
+                                  await User.setInf(
+                                      id,
+                                      res.data['data']['user']['uid'],
+                                      pwrd,
+                                      res.data['data']['token']);
+
+                                  Routes.pushForNamed(
+                                      context, RoutePath.selectJigsawPuzzle);
+                                } else {
                                   setState(() {
                                     _errorMessage = '账号或密码错误';
                                   });
                                 }
                               }
-                            }catch(e){
+                            } catch (e) {
+                              print(e);
                               setState(() {
                                 _errorMessage = '网络异常';
                               });
                             }
-
                           },
                           style: ElevatedButton.styleFrom(
                             elevation: 0,
@@ -158,7 +162,9 @@ class _LoginState extends State<Login> {
                         const SizedBox(height: 16.0),
                         TextButton(
                           onPressed: () {
-                            Routes.pushForNamed(context, RoutePath.selectJigsawPuzzle);
+                            // Routes.pushForNamed(
+                            //     context, RoutePath.selectJigsawPuzzle);
+                            Routes.push(context, const JigsawPuzzle(id: 1));
                           },
                           child: Text(
                             '暂不登录?',
@@ -174,7 +180,6 @@ class _LoginState extends State<Login> {
                                 ),
                           ),
                         ),
-
                       ],
                     ),
                   ),

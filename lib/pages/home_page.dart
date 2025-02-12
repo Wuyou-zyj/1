@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
   ///初始化
   Future<void> initialize()async{
     User.init();
-    if(User.uid.isNotEmpty&&User.token.isNotEmpty){
+    if(User.uid!=-1&&User.token.isNotEmpty){
       try{
         Response res = await UserDio.refTk();
         if(res.data['code']==200){

@@ -1,53 +1,37 @@
-import 'package:culture_popularization_app/models/user_inf.dart';
+import 'package:culture_popularization_app/dio/dio_instance.dart';
 import 'package:dio/dio.dart';
 
+import '../models/puzzle.dart';
+
 class ApiClient {
-  static final ApiClient _instance = ApiClient._internal();
-  late final Dio _dio;
+  static ApiClient instance = ApiClient._();
+  ApiClient._();
 
-  factory ApiClient() {
-    return _instance;
+
+  Future<List<PuzzleData?>?> getPuzzleInfo() async {
+    Response response= await DioInstance.instance().get(path: 'puzzle/get');
+    PuzzleDataList puzzleDataList=PuzzleDataList.fromJson(response.data);
+    return puzzleDataList.puzzleList;
   }
 
-  ApiClient._internal() {
-    _dio = Dio(BaseOptions(
-      baseUrl: 'YOUR_BASE_URL',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    ));
-
-    // Add interceptors for auth headers
-    _dio.interceptors.add(InterceptorsWrapper(
-      onRequest: (options, handler) {
-        // Add auth headers from secure storage
-        options.headers['Authorization'] = User.token;
-        options.headers['uid'] = User.uid;
-        return handler.next(options);
-      },
-    ));
-  }
-
-  Future<Response> getPuzzleInfo() async {
-    return await _dio.get('/puzzle/get');
-  }
-
-  Future<Response> movePuzzle(int puzzleId, List<int> unfinished) async {
-    return await _dio.post('/puzzle/move', data: {
+  Future<bool> movePuzzle(int puzzleId, List<int> unfinished) async {
+    Response response= await DioInstance.instance().post(path: 'puzzle/move', data: {
       'puzzleId': puzzleId,
       'unfinished': unfinished,
     });
+    return response.data;
   }
 
   Future<Response> withdrawMove() async {
-    return await _dio.post('/puzzle/withdraw');
+    return await DioInstance.instance().post(path: 'puzzle/withdraw');
   }
 
   Future<Response> refreshPuzzle() async {
-    return await _dio.get('/puzzle/refresh');
+    return await DioInstance.instance().get(path: 'puzzle/refresh');
   }
 
   Future<Response> savePuzzle() async {
-    return await _dio.post('/puzzle/save');
+    return await DioInstance.instance().post(path: 'puzzle/save');
   }
 }
+
