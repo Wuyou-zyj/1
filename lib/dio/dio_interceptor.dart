@@ -1,11 +1,10 @@
 import 'package:culture_popularization_app/models/base_model.dart';
 import 'package:dio/dio.dart';
-import 'package:oktoast/oktoast.dart';
-
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../models/user_inf.dart';
 
 class DioInterceptor extends InterceptorsWrapper {
+  
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
@@ -36,12 +35,13 @@ class DioInterceptor extends InterceptorsWrapper {
     }
   }
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async{
+    final SharedPreferences sp=await SharedPreferences.getInstance();
     if(options.path.contains('user/login')){
       handler.next(options);
     }else{
-      options.headers['Authorization'] = User.token;
-      options.headers['uid'] = User.uid;
+      options.headers['Authorization'] = sp.getString('token_f');
+      options.headers['uid'] = sp.getInt('uid_f');
       handler.next(options);
 
     }

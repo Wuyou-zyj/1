@@ -128,14 +128,14 @@ class _JigsawPuzzleState extends State<JigsawPuzzle> {
           if (puzzleData != null) {
             if (completed) {
               picture = value.puzzleList?[widget.id - 1]?.picture ;
-              print(picture);
+
             } else {
               existing = puzzleData.pieces?.existing ?? [];
               unfinished = puzzleData.pieces?.unfinished ?? [];
             }
           }
           if (!completed) getUnFinishedIdList(widget.id);
-          print(unfinishedIdList);
+
 
           return SafeArea(
               child: Container(
@@ -177,7 +177,7 @@ class _JigsawPuzzleState extends State<JigsawPuzzle> {
 
                         }else{
                           value.exit(widgetId);
-                          Routes.pushReplacementNamed(context,RoutePath.selectJigsawPuzzle);
+                          Routes.pop(context);
                         }
                       },
                       child: Container(
@@ -263,10 +263,7 @@ class _JigsawPuzzleState extends State<JigsawPuzzle> {
                           existing: existing,
                           unfinished: unfinished,
                           onDrop: (index, piece) async {
-                            print(index);
-                            print(piece);
                             int pieceId = getPuzzleId(piece!);
-                            print(pieceId);
                             if (index <= 4 * widgetId - 1 &&
                                 index >= 4 * widgetId - 4) {
                               successDrop = true;
@@ -278,7 +275,6 @@ class _JigsawPuzzleState extends State<JigsawPuzzle> {
                               await value.getPuzzle();
                             }
 
-                            print(unfinishedIdList);
                           }
 
                           // if (existing[index] == null) {
@@ -306,7 +302,7 @@ class _JigsawPuzzleState extends State<JigsawPuzzle> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             GestureDetector(onTap: (){
-                              print('重新开始');
+
                               value.refresh(widgetId);
 
                             }, child: Container(
@@ -325,7 +321,7 @@ class _JigsawPuzzleState extends State<JigsawPuzzle> {
                               ),
                             ),),
                             GestureDetector(onTap: (){
-                              print('撤销移动');
+
                               value.withDraw(widgetId);
 
                             },child: Container(
@@ -342,7 +338,7 @@ class _JigsawPuzzleState extends State<JigsawPuzzle> {
                               ),
                             ),),
                             GestureDetector(onTap: (){
-                              print('保存');
+
                               value.save(widgetId);
                               first=false;
 
@@ -366,7 +362,7 @@ class _JigsawPuzzleState extends State<JigsawPuzzle> {
                             unfinished: unfinished,
                             onDrag: (piece) {
                               if (successDrop) {
-                                print('移动成功');
+
                                 successDrop = false; // 移除已被拖动的拼图块
                               }
                             })
