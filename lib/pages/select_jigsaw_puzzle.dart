@@ -6,6 +6,8 @@ import 'package:culture_popularization_app/data/puzzle_vm.dart';
 import 'package:culture_popularization_app/pages/jigsaw_puzzle.dart';
 import 'package:culture_popularization_app/route/routes.dart';
 
+import '../models/user_inf.dart';
+
 /// 选择拼图页面
 class SelectJigsawPuzzle extends StatefulWidget {
   const SelectJigsawPuzzle({super.key});
@@ -54,10 +56,10 @@ class _SelectJigsawPuzzleState extends State<SelectJigsawPuzzle> {
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final r = size.width / 370;
     return ChangeNotifierProvider<PuzzleViewModel>(
       create: (context) {
         return puzzleViewModel;
@@ -116,6 +118,14 @@ class _SelectJigsawPuzzleState extends State<SelectJigsawPuzzle> {
                     completed: value.puzzleList?[PuzzleId.puzzle4 - 1]?.completed ?? false,
                     name: value.puzzleList?[PuzzleId.puzzle4 - 1]?.name ?? '',
                   ),
+                  Positioned(
+                    bottom: 5,
+                      left: 0.48*size.width,
+                      child: GestureDetector(onTap: ()async{
+                        await User.setToken('');
+
+
+                  },child: Text('退出'),))
                 ],
               ),
             );

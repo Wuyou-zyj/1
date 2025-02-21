@@ -12,7 +12,6 @@ class UserDio {
   }
 
   static Future<Response> refTk() async {
-    print('00000');
     Response res = await DioInstance.instance().get(path: 'user/refresh-token',);
     return res;
   }

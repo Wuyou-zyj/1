@@ -12,7 +12,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final _formKey = GlobalKey<FormState>();
+
   final _usernameController = TextEditingController(text: User.sid);
   final _passwordController = TextEditingController();
   String _errorMessage = '';

@@ -24,7 +24,7 @@ class PuzzleViewModel with ChangeNotifier {
 
   Future withDraw(int puzzleId) async {
     Response response = await ApiClient.instance.withdrawMove(puzzleId);
-    print(response);
+
     if (response.data is String) {
       return;
     }

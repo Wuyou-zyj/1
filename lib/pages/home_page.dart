@@ -2,9 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import '../route/routes.dart';
-import '../models/user_inf.dart';
-import '../dio/user_dio.dart';
-import 'package:dio/dio.dart';
+
 
 /// 首页(开始)
 class HomePage extends StatefulWidget {

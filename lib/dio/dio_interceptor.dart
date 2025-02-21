@@ -1,7 +1,7 @@
 import 'package:culture_popularization_app/models/base_model.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../models/user_inf.dart';
+
 
 class DioInterceptor extends InterceptorsWrapper {
   
@@ -24,7 +24,7 @@ class DioInterceptor extends InterceptorsWrapper {
                 requestOptions: response.requestOptions, data: res.data));
           }
         } else {
-          print(res.message);
+
         }
       } catch (e) {
         handler.reject(

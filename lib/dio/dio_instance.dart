@@ -1,7 +1,6 @@
 
 import 'package:culture_popularization_app/dio/dio_interceptor.dart';
 import 'package:culture_popularization_app/dio/dio_method.dart';
-import 'package:culture_popularization_app/dio/print_log_interceptor.dart';
 import 'package:dio/dio.dart';
 
 class DioInstance {
@@ -31,7 +30,7 @@ class DioInstance {
         sendTimeout: sendTimeout ?? _defaultTime);
 
      _dio.interceptors.add(DioInterceptor());
-     _dio.interceptors.add(PrintLogInterceptor());
+     // _dio.interceptors.add(PrintLogInterceptor());
   }
 
   ///GET请求

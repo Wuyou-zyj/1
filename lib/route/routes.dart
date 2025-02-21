@@ -30,6 +30,10 @@ class Routes {
     Navigator.pushReplacementNamed(context,name);
   }
 
+
+  static void pushNamedAndRemoveUntil(BuildContext context,String name){
+    Navigator.pushNamedAndRemoveUntil(context,name,(Route<dynamic> route) => false);
+  }
   ///关闭页面+传值
   static void popOfData<T extends Object?>(BuildContext context, {T? data}) {
     Navigator.of(context).pop(data);
