@@ -2,6 +2,7 @@ import 'package:culture_popularization_app/models/base_model.dart';
 import 'package:dio/dio.dart';
 import 'package:oktoast/oktoast.dart';
 
+
 import '../models/user_inf.dart';
 
 class DioInterceptor extends InterceptorsWrapper {
@@ -24,7 +25,7 @@ class DioInterceptor extends InterceptorsWrapper {
                 requestOptions: response.requestOptions, data: res.data));
           }
         } else {
-          showToast(res.message ?? "");
+          print(res.message);
         }
       } catch (e) {
         handler.reject(

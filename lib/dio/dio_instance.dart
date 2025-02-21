@@ -25,6 +25,7 @@ class DioInstance {
     _dio.options = BaseOptions(
         method: dioMethod,
         baseUrl: baseUrl,
+        contentType: 'application/json',
         connectTimeout: connectTimeout ?? _defaultTime,
         receiveTimeout: receiveTimeout ?? _defaultTime,
         sendTimeout: sendTimeout ?? _defaultTime);

@@ -20,31 +20,30 @@ class PuzzleRow extends StatelessWidget {
     double squareSize = (screenWidth - 40 - 3 * 10) / 4;
 
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20),
+
       padding: const EdgeInsets.all(5),
-      decoration: const BoxDecoration(color: Colors.grey),
+      // decoration: const BoxDecoration(color: Colors.grey),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween, // 等间距分布子项
         children: List.generate(unfinished.length, (index) {
           if(unfinished[index]==null){
-            return Container();
+            return const SizedBox(width: 0,height: 0,);
           }
           return  Draggable<String>(
             data: unfinished[index],
             feedback: Container(
               width: squareSize,
               height: squareSize,
-              alignment: Alignment.center,
-              padding: const EdgeInsets.all(20),
+              // alignment: Alignment.center,
               color: Colors.grey.withOpacity(0.5),
-              child: Center(child:Image.network(
-                unfinished[index]!,
+              child:Image.network(
+                unfinished[index]!,fit: BoxFit.contain,
                 // 'https://img.tukuppt.com/ad_preview/01/38/51/6323edba02ed5.jpg!/fw/780',
                 //     "http://tohsaka.cloud/img/picture_2_13.png",
                 errorBuilder: (context, error, stackTrace) {
                   return const Center(child: Text('加载图片失败'));
                 },
-              )),
+              ),
             ),
             onDragCompleted: () {
               onDrag(unfinished[index]);
@@ -53,17 +52,15 @@ class PuzzleRow extends StatelessWidget {
             child: Container(
                 width: squareSize,
                 height: squareSize,
-                padding: const EdgeInsets.all(20),
                 color: Colors.blue,
-                child: Center(
-                    child: Image.network(
-                  unfinished[index]!,
+                child: Image.network(
+                  unfinished[index]!,fit: BoxFit.contain,
                   // 'https://img.tukuppt.com/ad_preview/01/38/51/6323edba02ed5.jpg!/fw/780',
                   //     "http://tohsaka.cloud/img/picture_2_13.png",
                   errorBuilder: (context, error, stackTrace) {
                     return const Center(child: Text('加载图片失败'));
                   },
-                ))),
+                )),
           ) ;
         }),
         // children: [

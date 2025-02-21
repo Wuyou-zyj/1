@@ -26,6 +26,10 @@ class Routes {
     Navigator.pop(context);
   }
 
+  static void pushReplacementNamed(BuildContext context,String name){
+    Navigator.pushReplacementNamed(context,name);
+  }
+
   ///关闭页面+传值
   static void popOfData<T extends Object?>(BuildContext context, {T? data}) {
     Navigator.of(context).pop(data);

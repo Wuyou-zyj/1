@@ -22,16 +22,21 @@ class ApiClient {
     return response.data;
   }
 
-  Future<Response> withdrawMove() async {
-    return await DioInstance.instance().post(path: 'puzzle/withdraw');
+  Future<Response> withdrawMove(int puzzleId) async {
+      Response response= await DioInstance.instance().post(path: 'puzzle/withdraw',data:puzzleId);
+      return response;
   }
 
-  Future<Response> refreshPuzzle() async {
-    return await DioInstance.instance().get(path: 'puzzle/refresh');
+  Future refreshPuzzle(int puzzleId) async {
+    return await DioInstance.instance().post(path: 'puzzle/refresh',data: puzzleId);
   }
 
-  Future<Response> savePuzzle() async {
-    return await DioInstance.instance().post(path: 'puzzle/save');
+  Future<Response> savePuzzle(int puzzleId) async {
+    return await DioInstance.instance().post(path: 'puzzle/save',data: puzzleId);
+  }
+  Future<Response> exit(int puzzleId)async{
+
+    return await DioInstance.instance().post(path: 'puzzle/exit',data:puzzleId);
   }
 }
 

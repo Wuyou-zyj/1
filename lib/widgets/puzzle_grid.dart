@@ -16,8 +16,12 @@ class PuzzleGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     // 获取屏幕宽度
     double screenWidth = MediaQuery.of(context).size.width;
+    double r=screenWidth/370;
 
     return Container(
+      width: 300*r,
+      height: 300*r,
+      decoration: BoxDecoration(color: Colors.grey.withOpacity(0.5),borderRadius: BorderRadius.circular(10)),
       alignment: Alignment.center, // 容器内容居中对齐
       padding: const EdgeInsets.symmetric(horizontal: 20), // 左右内边距 20
       child: GridView.builder(
@@ -27,8 +31,8 @@ class PuzzleGrid extends StatelessWidget {
         // 高度动态缩放
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 4, // 每行固定显示 4 列
-          mainAxisSpacing: 5, // 主轴方向子项间距
-          crossAxisSpacing: 5, // 横轴方向子项间距
+          mainAxisSpacing: 1, // 主轴方向子项间距
+          crossAxisSpacing: 1, // 横轴方向子项间距
           childAspectRatio: 1, // 子项宽高比设置为 1，使其为正方形
         ),
         itemCount: existing.length,
@@ -40,17 +44,19 @@ class PuzzleGrid extends StatelessWidget {
             },
             builder: (context, candidateData, rejectedData) {
               return Container(
-                  alignment: Alignment.center,
-                  color: Colors.blue, // 设置一个颜色以便观察布局
+                width: 75*r,
+                  height: 75*r,
+                  // alignment: Alignment.center,
+                  // color: Colors.blue, // 设置一个颜色以便观察布局
                   child: existing[index]==null
-                      ? const Center(child: Text('待拼'))
-                      : Center(
-                          child: Image.network(
-                          existing[index]!,
+                      ? const Center()
+                      :
+                          Image.network(
+                          existing[index]!,fit: BoxFit.contain,
                           errorBuilder: (context, error, stackTrace) {
                             return const Center(child: Text('加载图片失败'));
                           },
-                        )));
+                        ));
             },
           );
         },
