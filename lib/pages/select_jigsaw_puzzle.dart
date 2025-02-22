@@ -56,7 +56,6 @@ class _SelectJigsawPuzzleState extends State<SelectJigsawPuzzle> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -91,41 +90,56 @@ class _SelectJigsawPuzzleState extends State<SelectJigsawPuzzle> {
                     index: 0,
                     initialOffset: Offset(0.1 * size.width, 0.35 * size.height),
                     id: PuzzleId.puzzle1,
-                    completed: value.puzzleList?[PuzzleId.puzzle1 - 1]?.completed ?? false,
+                    completed:
+                        value.puzzleList?[PuzzleId.puzzle1 - 1]?.completed ??
+                            false,
                     name: value.puzzleList?[PuzzleId.puzzle1 - 1]?.name ?? '',
                   ),
                   _buildFlower(
                     context,
                     index: 1,
-                    initialOffset: Offset(0.15 * size.width, 0.65 * size.height),
+                    initialOffset:
+                        Offset(0.15 * size.width, 0.65 * size.height),
                     id: PuzzleId.puzzle2,
-                    completed: value.puzzleList?[PuzzleId.puzzle2 - 1]?.completed ?? false,
+                    completed:
+                        value.puzzleList?[PuzzleId.puzzle2 - 1]?.completed ??
+                            false,
                     name: value.puzzleList?[PuzzleId.puzzle2 - 1]?.name ?? '',
                   ),
                   _buildFlower(
                     context,
                     index: 2,
-                    initialOffset: Offset(0.65 * size.width, 0.45 * size.height),
+                    initialOffset:
+                        Offset(0.65 * size.width, 0.45 * size.height),
                     id: PuzzleId.puzzle3,
-                    completed: value.puzzleList?[PuzzleId.puzzle3 - 1]?.completed ?? false,
+                    completed:
+                        value.puzzleList?[PuzzleId.puzzle3 - 1]?.completed ??
+                            false,
                     name: value.puzzleList?[PuzzleId.puzzle3 - 1]?.name ?? '',
                   ),
                   _buildFlower(
                     context,
                     index: 3,
-                    initialOffset: Offset(0.67 * size.width, 0.75 * size.height),
+                    initialOffset:
+                        Offset(0.67 * size.width, 0.75 * size.height),
                     id: PuzzleId.puzzle4,
-                    completed: value.puzzleList?[PuzzleId.puzzle4 - 1]?.completed ?? false,
+                    completed:
+                        value.puzzleList?[PuzzleId.puzzle4 - 1]?.completed ??
+                            false,
                     name: value.puzzleList?[PuzzleId.puzzle4 - 1]?.name ?? '',
                   ),
                   Positioned(
-                    bottom: 5,
-                      left: 0.48*size.width,
-                      child: GestureDetector(onTap: ()async{
-                        await User.setToken('');
+                      bottom: 10,
+                      left: 0.48 * size.width,
+                      child: GestureDetector(
+                        onTap: () async {
+                          await User.setToken('');
 
-
-                  },child: Text('退出'),))
+                          Routes.pushNamedAndRemoveUntil(
+                              context, RoutePath.login);
+                        },
+                        child: Text('退出'),
+                      ))
                 ],
               ),
             );
@@ -135,7 +149,8 @@ class _SelectJigsawPuzzleState extends State<SelectJigsawPuzzle> {
     );
   }
 
-  Widget _buildFlower(BuildContext context, {
+  Widget _buildFlower(
+    BuildContext context, {
     required int index,
     required Offset initialOffset,
     required int id,
@@ -144,7 +159,9 @@ class _SelectJigsawPuzzleState extends State<SelectJigsawPuzzle> {
   }) {
     final size = MediaQuery.of(context).size;
     final r = size.width / 370;
-    Offset offset = flowerPositions[index] == Offset.zero ? initialOffset : flowerPositions[index];
+    Offset offset = flowerPositions[index] == Offset.zero
+        ? initialOffset
+        : flowerPositions[index];
     return Positioned(
       left: offset.dx,
       top: offset.dy,

@@ -256,6 +256,9 @@ class _JigsawPuzzleState extends State<JigsawPuzzle> {
                           height: 300 * r,
                           child: Image.network(
                             picture!,
+                            errorBuilder: (context, error, stackTrace) {
+                              return const Text('图片加载失败');
+                            },
                             fit: BoxFit.contain,
                           ),
                         )
